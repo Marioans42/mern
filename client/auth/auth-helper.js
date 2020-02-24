@@ -1,3 +1,5 @@
+import { signout } from './api-auth.js'
+
 const auth = {
     authenticate(jwt, cb) {
         if(typeof window !== "undefined")
@@ -15,13 +17,14 @@ const auth = {
     },
 
     signout(cb) {
-        if(typeof window !== "undefined")
-            sessionStorage.removeItem('jwt')
+        if (typeof window !== "undefined")
+          sessionStorage.removeItem('jwt')
         cb()
-    signout().then((data) => {
-        document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        //optional
+        signout().then((data) => {
+          document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         })
-    }
+      }
 }
 
 export default auth
